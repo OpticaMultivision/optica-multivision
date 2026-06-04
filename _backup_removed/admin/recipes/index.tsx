@@ -1,0 +1,223 @@
+import { useRouter } from 'next/router';
+import { Fragment, ReactElement, useState } from 'react';
+import { Avatar, Box, IconButton, Pagination, TextField } from '@mui/material';
+import Delete from '@mui/icons-material/Delete';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+// custom components
+import Loading from 'components/Loading';
+import TableRow from 'components/TableRow';
+import getHeaderLink from 'components/getHeaderLink';
+import { H5, Paragraph } from 'components/Typography';
+import DeliveryBox from 'components/icons/DeliveryBox';
+import ConfirmationAlert from 'components/ConfirmationAlert';
+import {
+  FlexContentCenter,
+  FlexItemCenter,
+  FlexBox,
+} from 'components/flex-box';
+// layout
+import { NextPageWithLayout } from '../../_app';
+import DashboardPageHeader from 'components/DashboardPageHeader';
+import AdminDashboardLayout from 'components/layouts/admin-dashboard/Layout';
+// custom hook
+import useRecipes from 'hooks/useRecipes';
+// utils function for show error message
+import getErrorMessage from 'utils/getErrorMessage';
+// utils function for pagination
+import pagination from '__server__/utils/pagination';
+import products from '../products';
+
+const Recipes: NextPageWithLayout = () => {
+  const { push } = useRouter();
+  const [deleteId, setDeleteId] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+
+  // GET ALL PRODUCTS FROM SERVER
+  const { recipes, isLoading, mutate } = useRecipes();
+
+  // FILTER PRODUCT WITH USER SEARCHING VALUE
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.customerName.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
+  // PER PAGE PRODUCT LIST
+  const currentRecipes = pagination(currentPage, filteredRecipes);
+
+  // HANDLE CONFIRMATION MODAL CLOSE
+  const dialogClose = () => {
+    setDeleteId('');
+    setDialogOpen(false);
+  };
+
+  // HANDLE DELETE PRODUCT FROM PRODUCT LIST
+  const handleDeleteRecipe = async () => {
+    if (deleteId) {
+      try {
+        await axios.delete(`/api/recipes/${deleteId}`);
+        mutate();
+        setDeleteId('');
+        setDialogOpen(false);
+        toast.success('Receta eliminada exitosamente');
+      } catch (error) {
+        toast.error(getErrorMessage(error));
+      }
+    }
+  };
+
+  const paginationCount = searchValue
+    ? Math.ceil(currentRecipes.length / 10)
+    : Math.ceil(products.length / 10);
+
+  // SHOW LOADING STATUS WHEN DATA FETCHING
+  if (isLoading) return <Loading />;
+
+  return (
+    <Fragment>
+      <TextField
+        fullWidth
+        placeholder="Buscar receta..."
+        onChange={(e) => setSearchValue(e.target.value)}
+        sx={{ mb: 2, maxWidth: { md: '40%', xs: '100%' } }}
+      />
+
+      <TableRow
+        elevation={0}
+        sx={{
+          mb: '-0.125rem',
+          padding: '0px 18px',
+          bgcolor: 'transparent',
+          display: { xs: 'none', md: 'flex' },
+        }}
+      >
+        <FlexBox my={0} mx={0.75} flex="2 2 220px !important">
+          <H5 ml={7} color="grey.600" textAlign="left">
+            Cliente
+          </H5>
+        </FlexBox>
+
+        <H5 color="grey.600" my="0px" mx={0.75} textAlign="left">
+          Cantidad
+        </H5>
+
+        <H5 color="grey.600" my="0px" mx={0.75} textAlign="left">
+          Precio base
+        </H5>
+
+        <H5 color="grey.600" my="0px" mx={0.75} textAlign="left">
+          Descuento
+        </H5>
+
+        <H5 color="grey.600" my="0px" mx={0.75} textAlign="left">
+          Precio venta
+        </H5>
+
+        <H5 flex="0 0 0 !important" color="grey.600" px={2.75} my="0px" />
+      </TableRow>
+
+      {currentRecipes.map((recipe) => {
+        const { _id, customerName, recipeDetails } = recipe;
+
+        const basePrice = recipeDetails.price.base;
+        const discount = recipeDetails.price.discount;
+        const salePrice = basePrice - (basePrice * discount) / 100;
+
+        return (
+          <TableRow
+            key={_id}
+            onClick={() => push(`/admin/recipes/${_id}`)}
+            sx={{ my: '1rem', padding: '6px 18px' }}
+          >
+            <FlexItemCenter gap={2.5} m={0.75} flex="2 2 220px !important">
+              <Avatar
+                src={recipeDetails.image[0]?.location}
+                sx={{ height: 36, width: 36 }}
+              />
+              <Paragraph textAlign="left">{customerName}</Paragraph>
+            </FlexItemCenter>
+
+            <H5
+              m={0.75}
+              textAlign="left"
+              fontWeight="600"
+              color={recipeDetails.quantity}
+            >
+              {recipeDetails.quantity.toString().padStart(2, '0')}
+            </H5>
+
+            <H5 m={0.75} textAlign="left" fontWeight="400">
+              {Intl.NumberFormat('es-CL', {
+                style: 'currency',
+                currency: 'CLP',
+              }).format(basePrice)}
+            </H5>
+
+            <H5 m={0.75} textAlign="left" fontWeight="400">
+              {discount}%
+            </H5>
+
+            <H5 m={0.75} textAlign="left" fontWeight="400">
+              {Intl.NumberFormat('es-CL', {
+                style: 'currency',
+                currency: 'CLP',
+              }).format(salePrice)}
+            </H5>
+
+            <Box
+              color="grey.600"
+              textAlign="center"
+              sx={{
+                flex: '0 0 0 !important',
+                display: { xs: 'none', md: 'flex' },
+              }}
+            >
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setDialogOpen(true);
+                  setDeleteId(_id);
+                }}
+              >
+                <Delete fontSize="small" color="inherit" />
+              </IconButton>
+            </Box>
+          </TableRow>
+        );
+      })}
+
+      <ConfirmationAlert
+        open={dialogOpen}
+        close={dialogClose}
+        handleConfirm={handleDeleteRecipe}
+        description="Quieres eliminar esta receta"
+      />
+
+      <FlexContentCenter mt={5}>
+        <Pagination
+          count={paginationCount}
+          onChange={(_, value) => setCurrentPage(value)}
+        />
+      </FlexContentCenter>
+    </Fragment>
+  );
+};
+
+// ==================================================================
+Recipes.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <AdminDashboardLayout>
+      <DashboardPageHeader
+        title="Recetas"
+        Icon={DeliveryBox}
+        button={getHeaderLink('/admin/add-recipe', 'Agregar receta')}
+      />
+
+      {page}
+    </AdminDashboardLayout>
+  );
+};
+// ==================================================================
+
+export default Recipes;

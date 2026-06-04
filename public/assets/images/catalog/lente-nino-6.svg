@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 500 320">
+    <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ec4899" stop-opacity=".35"/></linearGradient></defs>
+    <rect width="500" height="320" rx="28" fill="url(#g)"/>
+    <circle cx="420" cy="42" r="88" fill="#ec4899" opacity=".18"/>
+    <circle cx="55" cy="280" r="90" fill="#ec4899" opacity=".14"/>
+    <rect x="88" y="130" width="135" height="86" rx="32" fill="#fff" stroke="#ff7a59" stroke-width="13"/><rect x="277" y="130" width="135" height="86" rx="32" fill="#fff" stroke="#ff7a59" stroke-width="13"/><path d="M223 170 Q250 158 277 170" stroke="#ff7a59" stroke-width="11" fill="none" stroke-linecap="round"/><circle cx="116" cy="124" r="16" fill="#57c7ff"/><circle cx="384" cy="124" r="16" fill="#8ce56b"/>
+    <text x="40" y="55" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="800" fill="#111827">Lente niño 6</text>
+    <text x="40" y="86" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#4b5563">Uso escolar</text>
+    </svg>

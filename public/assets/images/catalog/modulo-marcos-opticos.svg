@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 500 320">
+    <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#3b82f6" stop-opacity=".35"/></linearGradient></defs>
+    <rect width="500" height="320" rx="28" fill="url(#g)"/>
+    <circle cx="420" cy="42" r="88" fill="#3b82f6" opacity=".18"/>
+    <circle cx="55" cy="280" r="90" fill="#3b82f6" opacity=".14"/>
+    <rect x="90" y="130" width="135" height="86" rx="24" fill="#fff" stroke="#1f2937" stroke-width="13"/><rect x="275" y="130" width="135" height="86" rx="24" fill="#fff" stroke="#1f2937" stroke-width="13"/><path d="M225 170 Q250 158 275 170" stroke="#1f2937" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M90 165 Q58 146 35 135" stroke="#1f2937" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M410 165 Q442 146 465 135" stroke="#1f2937" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <text x="40" y="55" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="800" fill="#111827">Marcos ópticos</text>
+    <text x="40" y="86" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#4b5563">Clásicos, modernos y livianos</text>
+    </svg>
