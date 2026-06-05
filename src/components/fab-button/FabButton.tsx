@@ -9,7 +9,7 @@ const FabButtonComponent = () => {
       <Fab
         onClick={() =>
           window.open(
-            'https://www.instagram.com/optica.multivision105/',
+            'https://www.instagram.com/optica.multivision_lascondes/',
             '_blank'
           )
         }
