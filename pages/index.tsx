@@ -261,7 +261,7 @@ export default function HomePage() {
             <Grid item xs={12} md={6}>
               <Chip label="Cotiza directo por WhatsApp" color="primary" sx={{ mb: 2 }} />
               <Typography variant="h2" component="h1" fontWeight={900} lineHeight={1.05}>
-                PRUEBA CAMBIO FELIPE 123
+                Lentes, cristales y asesoría óptica en un solo lugar
               </Typography>
               <Typography variant="h6" color="text.secondary" sx={{ mt: 2, mb: 4 }}>
                 Revisa productos, arma tu carrito y envía tu solicitud directamente por WhatsApp, sin crear cuenta y sin pagos online.
