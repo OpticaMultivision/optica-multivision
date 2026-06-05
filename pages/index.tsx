@@ -57,7 +57,7 @@ type CatalogModule = {
 type CartItem = Product & { qty: number };
 
 const WHATSAPP_NUMBER = '56932271822';
-const INSTAGRAM_URL = 'https://www.instagram.com/multivision105/';
+const INSTAGRAM_URL = 'https://www.instagram.com/optica.multivision_lascondes/';
 const STORE_ADDRESS = 'Gilberto Fuenzalida 185, local 119 segundo piso, Las Condes, Chile';
 const GOOGLE_MAPS_EMBED = `https://www.google.com/maps?q=${encodeURIComponent(STORE_ADDRESS)}&output=embed`;
 const GOOGLE_MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE_ADDRESS)}`;
@@ -261,7 +261,7 @@ export default function HomePage() {
             <Grid item xs={12} md={6}>
               <Chip label="Cotiza directo por WhatsApp" color="primary" sx={{ mb: 2 }} />
               <Typography variant="h2" component="h1" fontWeight={900} lineHeight={1.05}>
-                Lentes, cristales y asesoría óptica en un solo lugar
+                PRUEBA CAMBIO FELIPE 123
               </Typography>
               <Typography variant="h6" color="text.secondary" sx={{ mt: 2, mb: 4 }}>
                 Revisa productos, arma tu carrito y envía tu solicitud directamente por WhatsApp, sin crear cuenta y sin pagos online.
