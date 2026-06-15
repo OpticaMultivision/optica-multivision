@@ -26,7 +26,7 @@ export default [
       socialLinks: [
         { name: "Facebook", link: "https://www.facebook.com/UILibOfficial", icon: "Facebook" },
         { name: "Twitter", link: "https://twitter.com/uilibofficial", icon: "Twitter" },
-        { name: "Instagram", link: "https://www.instagram.com/uilibofficial", icon: "Instagram" },
+        { name: "Instagram", link: "https://www.instagram.com/optica.multivision_lascondes/", icon: "Instagram" },
         { name: "Youtube", link: "", icon: "Youtube" },
       ],
     },

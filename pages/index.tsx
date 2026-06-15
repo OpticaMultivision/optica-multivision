@@ -7,6 +7,12 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import PlaceIcon from '@mui/icons-material/Place';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
+import StarRateIcon from '@mui/icons-material/StarRate';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import SellIcon from '@mui/icons-material/Sell';
+import DescriptionIcon from '@mui/icons-material/Description';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CloseIcon from '@mui/icons-material/Close';
@@ -27,6 +33,7 @@ import {
   Divider,
   Drawer,
   Fab,
+  GlobalStyles,
   Grid,
   IconButton,
   Stack,
@@ -67,32 +74,24 @@ const catalogModules: CatalogModule[] = [
     key: 'marcos-opticos',
     name: 'Marcos ópticos',
     category: 'Óptica diaria',
-    description: 'Modelos clásicos, modernos, livianos y cómodos para adaptar con receta.',
+    description: 'Diseños modernos, cómodos y versátiles para toda la familia.',
     image: '/assets/images/catalog/modulo-marcos-opticos.svg',
-  },
-  {
-    key: 'lentes-sol',
-    name: 'Lentes de sol',
-    category: 'Protección UV',
-    description: 'Estilos icónicos tipo aviador, wayfarer, redondos y deportivos.',
-    image: '/assets/images/catalog/modulo-lentes-sol.svg',
   },
   {
     key: 'cristales-opticos',
     name: 'Cristales ópticos',
-    category: 'Según receta',
-    description: 'Opciones monofocales, multifocales, filtro azul, antirreflejo y fotocromáticas.',
+    category: 'Tecnología visual',
+    description: 'Cristales monofocales, multifocales, filtro azul y fotocromáticos.',
     image: '/assets/images/catalog/modulo-cristales-opticos.svg',
   },
   {
-    key: 'lentes-ninos',
-    name: 'Lentes para niños',
-    category: 'Infantil',
-    description: 'Marcos resistentes, livianos y cómodos para uso escolar y diario.',
-    image: '/assets/images/catalog/modulo-lentes-ninos.svg',
+    key: 'lentes-sol',
+    name: 'Lentes',
+    category: 'Modelos destacados',
+    description: 'Lentes ópticos, solares y opciones para niños.',
+    image: '/assets/images/catalog/modulo-lentes-sol.svg',
   },
 ];
-
 const catalogProducts: Record<CatalogKey, Product[]> = {
   'marcos-opticos': [
     ['Marco rectangular clásico', 'Diseño sobrio para oficina, estudio y uso diario.', ['Formato rectangular', 'Liviano y cómodo', 'Ideal para cristales ópticos'], 1],
@@ -178,6 +177,45 @@ const promotions = [
   'Cotización rápida por WhatsApp',
 ];
 
+const informationItems = [
+  {
+    title: 'Entregas en 1 Hora',
+    icon: AccessTimeIcon,
+    description:
+      'Contamos con equipamiento especializado y procesos ágiles para preparar una amplia variedad de lentes ópticos en tiempos reducidos. Presenta tu receta y consulta por las alternativas disponibles para entrega el mismo día.',
+  },
+  {
+    title: 'Reparaciones',
+    icon: BuildCircleIcon,
+    description:
+      'Realizamos ajustes, mantenciones, cambios de tornillos, plaquetas y revisión general de marcos. Evaluamos cada caso para orientarte con una solución rápida, segura y conveniente.',
+  },
+  {
+    title: 'Valoración de Google',
+    icon: StarRateIcon,
+    description:
+      'Nuestros clientes destacan la atención cercana, la rapidez en la entrega y la buena asesoría al elegir sus lentes. Comentarios frecuentes: “excelente atención”, “muy rápidos” y “gran variedad de marcos”.',
+  },
+  {
+    title: 'Servicios',
+    icon: VisibilityIcon,
+    description:
+      'Te acompañamos desde la elección del marco hasta la entrega final de tus lentes. Ofrecemos orientación personalizada en cristales ópticos, lentes de sol, marcos para niños y soluciones para uso diario o laboral.',
+  },
+  {
+    title: 'Valores',
+    icon: SellIcon,
+    description:
+      'Trabajamos con alternativas para distintos presupuestos, cuidando siempre la calidad, comodidad y estética. Te ayudamos a encontrar una solución visual acorde a tu receta, necesidad y estilo.',
+  },
+  {
+    title: 'Información de Reembolso',
+    icon: DescriptionIcon,
+    description:
+      'Entregamos la documentación necesaria para facilitar solicitudes de reembolso en Isapres, seguros complementarios u otros convenios. Nuestro equipo puede orientarte sobre los antecedentes requeridos.',
+  },
+];
+
 export default function HomePage() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -209,7 +247,7 @@ export default function HomePage() {
       ? cart.map((item) => `• ${item.name} (${item.category}) x${item.qty}`).join('\n')
       : 'Quiero hacer una consulta general.';
 
-    const message = `Hola, me interesa cotizar en Óptica Multivision:\n\n${productText}\n\nMi nombre es:`;
+    const message = `Hola, me interesa cotizar en Óptica Multivision Las Condes:\n\n${productText}\n\nMi nombre es:`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
@@ -221,12 +259,21 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title>Óptica Multivision</title>
+        <title>Óptica Multivision Las Condes</title>
         <meta
           name="description"
-          content="Óptica Multivision: catálogo visual, promociones, contacto y cotización directa por WhatsApp."
+          content="Óptica Multivision Las Condes: catálogo visual, promociones, contacto y cotización directa por WhatsApp."
         />
       </Head>
+
+      <GlobalStyles
+        styles={{
+          html: { scrollBehavior: 'smooth' },
+          body: {
+            background: 'linear-gradient(180deg, #f4fbff 0%, #e7f7ff 45%, #f8fdff 100%)',
+          },
+        }}
+      />
 
       <AppBar position="sticky" color="inherit" elevation={1}>
         <Toolbar sx={{ gap: 2 }}>
@@ -234,18 +281,18 @@ export default function HomePage() {
             <Box sx={{ position: 'relative', width: { xs: 54, sm: 64 }, height: { xs: 54, sm: 64 }, flexShrink: 0 }}>
               <Image
                 src="/assets/images/optica-multivision-logo.png"
-                alt="Logo Óptica Multivision"
+                alt="Logo Óptica Multivision Las Condes"
                 fill
                 style={{ objectFit: 'contain' }}
                 priority
               />
             </Box>
             <Typography variant="h6" fontWeight={900} sx={{ display: { xs: 'none', sm: 'block' } }}>
-              Óptica Multivision
+              Óptica Multivision Las Condes
             </Typography>
           </Box>
-          <Button href="#promociones" sx={{ display: { xs: 'none', md: 'inline-flex' } }}>Promociones</Button>
-          <Button href="#productos" sx={{ display: { xs: 'none', md: 'inline-flex' } }}>Catálogo</Button>
+          <Button href="#informacion" sx={{ display: { xs: 'none', md: 'inline-flex' } }}>Información</Button>
+          <Button href="#catalogo" sx={{ display: { xs: 'none', md: 'inline-flex' } }}>Catálogo</Button>
           <Button href="#contacto" sx={{ display: { xs: 'none', md: 'inline-flex' } }}>Contacto</Button>
           <IconButton onClick={() => setDrawerOpen(true)} aria-label="Abrir carrito">
             <Badge badgeContent={totalItems} color="primary">
@@ -255,71 +302,125 @@ export default function HomePage() {
         </Toolbar>
       </AppBar>
 
-      <Box sx={{ background: 'linear-gradient(135deg, #f3f8ff 0%, #ffffff 55%, #eef7f4 100%)', py: { xs: 7, md: 11 } }}>
-        <Container>
-          <Grid container spacing={5} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Chip label="Cotiza directo por WhatsApp" color="primary" sx={{ mb: 2 }} />
-              <Typography variant="h2" component="h1" fontWeight={900} lineHeight={1.05}>
-                Lentes, cristales y asesoría óptica en un solo lugar
-              </Typography>
-              <Typography variant="h6" color="text.secondary" sx={{ mt: 2, mb: 4 }}>
-                Revisa productos, arma tu carrito y envía tu solicitud directamente por WhatsApp, sin crear cuenta y sin pagos online.
-              </Typography>
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <Button variant="contained" size="large" startIcon={<WhatsAppIcon />} onClick={sendCartToWhatsApp}>
-                  Cotizar por WhatsApp
-                </Button>
-                <Button variant="outlined" size="large" href={INSTAGRAM_URL} target="_blank" startIcon={<InstagramIcon />}>
-                  Instagram
-                </Button>
-              </Stack>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Card sx={{ borderRadius: 5, overflow: 'hidden', boxShadow: '0 24px 70px rgba(15, 23, 42, 0.16)' }}>
-                <Box sx={{ position: 'relative', width: '100%', height: { xs: 270, sm: 360, md: 430 }, backgroundColor: '#f7fafc' }}>
-                  <Image
-                    src="/assets/images/catalog/optica-multivision-frontal-dia.png"
-                    alt="Fachada Óptica Multivision"
-                    fill
-                    priority
-                    sizes="(max-width: 900px) 100vw, 50vw"
-                    style={{ objectFit: 'cover' }}
-                  />
-                </Box>
-              </Card>
-            </Grid>
-          </Grid>
+      <Box sx={{ background: 'linear-gradient(180deg, #dff4ff 0%, #eef9ff 100%)' }}>
+        <Box
+          sx={{
+            width: '100%',
+            overflow: 'hidden',
+            backgroundColor: '#e7f7ff',
+          }}
+        >
+          <Image
+            src="/assets/images/portada-optica.jpeg"
+            alt="Fachada Óptica Multivision Las Condes"
+            width={1600}
+            height={900}
+            priority
+            sizes="100vw"
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+            }}
+          />
+        </Box>
+
+        <Container sx={{ mt: { xs: 3, md: 4 }, position: 'relative', zIndex: 2, pb: { xs: 6, md: 8 } }}>
+          <Card
+            sx={{
+              maxWidth: 980,
+              mx: 'auto',
+              borderRadius: 5,
+              px: { xs: 3, md: 6 },
+              py: { xs: 4, md: 5 },
+              textAlign: 'center',
+              boxShadow: '0 24px 70px rgba(15, 23, 42, 0.18)',
+              background: 'rgba(255,255,255,0.96)',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            <Chip label="Cotiza directo por WhatsApp" color="primary" sx={{ mb: 2 }} />
+            <Typography variant="h2" component="h1" fontWeight={900} lineHeight={1.05}>
+              Más que lentes, cuidamos tu visión.
+            </Typography>
+            <Typography variant="h6" color="text.secondary" sx={{ mt: 2, mb: 4 }}>
+              Descubre la mejor atención y amplia variedad de marcos para toda la familia.
+            </Typography>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
+              <Button variant="contained" size="large" startIcon={<WhatsAppIcon />} onClick={sendCartToWhatsApp}>
+                Cotización WhatsApp
+              </Button>
+              <Button variant="outlined" size="large" href={INSTAGRAM_URL} target="_blank" startIcon={<InstagramIcon />}>
+                Instagram
+              </Button>
+            </Stack>
+          </Card>
         </Container>
       </Box>
 
-      <Container id="promociones" sx={{ py: 7 }}>
-        <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 3 }}>
+      <Container id="informacion" sx={{ py: 7 }}>
+        <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2 }}>
           <LocalOfferIcon color="primary" />
-          <Typography variant="h4" fontWeight={900}>Promociones</Typography>
+          <Typography variant="h4" fontWeight={900}>Información</Typography>
         </Stack>
+        <Typography color="text.secondary" sx={{ mb: 4, maxWidth: 820 }}>
+          Atención cercana, soluciones rápidas y asesoría personalizada para cuidar tu visión y la de tu familia.
+        </Typography>
         <Grid container spacing={3}>
-          {promotions.map((promo) => (
-            <Grid item xs={12} md={4} key={promo}>
-              <Card sx={{ height: '100%', borderRadius: 4 }}>
-                <CardContent>
-                  <Chip label="Promo" color="secondary" size="small" sx={{ mb: 2 }} />
-                  <Typography variant="h6" fontWeight={800}>{promo}</Typography>
-                  <Typography color="text.secondary" sx={{ mt: 1 }}>
-                    Escríbenos y confirmamos disponibilidad, valores y condiciones vigentes.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+          {informationItems.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <Grid item xs={12} sm={6} md={4} key={item.title}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    borderRadius: 4,
+                    background: 'rgba(255,255,255,0.92)',
+                    border: '1px solid rgba(56, 189, 248, 0.18)',
+                    boxShadow: '0 16px 42px rgba(15, 23, 42, 0.08)',
+                    transition: 'all .25s ease',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 22px 52px rgba(15, 23, 42, 0.13)',
+                    },
+                  }}
+                >
+                  <CardContent sx={{ p: 3 }}>
+                    <Box
+                      sx={{
+                        width: 52,
+                        height: 52,
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        mb: 2,
+                        color: 'primary.main',
+                        background: 'linear-gradient(135deg, #e0f7ff 0%, #f2fbff 100%)',
+                      }}
+                    >
+                      <Icon fontSize="medium" />
+                    </Box>
+                    <Typography variant="h6" fontWeight={900} sx={{ mb: 1 }}>
+                      {item.title}
+                    </Typography>
+                    <Typography color="text.secondary" lineHeight={1.7}>
+                      {item.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
 
-      <Box id="productos" sx={{ bgcolor: '#fafafa', py: 7 }}>
+<Box id="catalogo" sx={{ bgcolor: 'rgba(231, 247, 255, 0.72)', py: 7 }}>
         <Container>
-          <Typography variant="h4" fontWeight={900} sx={{ mb: 1 }}>Catálogo visual</Typography>
+          <Typography variant="h4" fontWeight={900} sx={{ mb: 1 }}>Catálogo Visual</Typography>
           <Typography color="text.secondary" sx={{ mb: 4 }}>
-            Selecciona una categoría para ver artículos referenciales. No mostramos precios: todo se cotiza directo por WhatsApp.
+            Explora nuestros módulos visuales y descubre distintos estilos y soluciones ópticas.
           </Typography>
           <Grid container spacing={3}>
             {catalogModules.map((module) => (
@@ -347,6 +448,34 @@ export default function HomePage() {
                 </Card>
               </Grid>
             ))}
+            <Grid item xs={12} sm={6} md={3}>
+              <Card
+                component="a"
+                href={INSTAGRAM_URL}
+                target="_blank"
+                sx={{
+                  height: '100%',
+                  minHeight: 360,
+                  borderRadius: 4,
+                  textDecoration: 'none',
+                  background: 'linear-gradient(135deg, #38bdf8 0%, #818cf8 100%)',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  transition: 'all .25s ease',
+                  '&:hover': { transform: 'translateY(-6px)', boxShadow: '0 20px 45px rgba(15,23,42,.18)' },
+                }}
+              >
+                <CardContent>
+                  <InstagramIcon sx={{ fontSize: 56, mb: 2 }} />
+                  <Typography variant="h5" fontWeight={900}>
+                    Más módulos al Instagram
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
           </Grid>
         </Container>
       </Box>
@@ -394,7 +523,7 @@ export default function HomePage() {
         <Container>
           <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems={{ xs: 'flex-start', md: 'center' }} justifyContent="space-between">
             <Box>
-              <Typography fontWeight={900}>Óptica Multivision</Typography>
+              <Typography fontWeight={900}>Óptica Multivision Las Condes</Typography>
               <Typography variant="body2" sx={{ opacity: 0.75 }}>Tu visión, nuestra misión.</Typography>
             </Box>
             <Stack direction="row" spacing={1}>

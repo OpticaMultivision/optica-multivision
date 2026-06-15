@@ -27,5 +27,6 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  } // Don't run prettier for files listed in .gitignore
+  },
+  "liveServer.settings.port": 5501 // Don't run prettier for files listed in .gitignore
 }
