@@ -18,6 +18,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CloseIcon from '@mui/icons-material/Close';
 import {
   AppBar,
+  Avatar,
   Badge,
   Box,
   Button,
@@ -213,6 +214,37 @@ const informationItems = [
     icon: DescriptionIcon,
     description:
       'Entregamos la documentación necesaria para facilitar solicitudes de reembolso en Isapres, seguros complementarios u otros convenios. Nuestro equipo puede orientarte sobre los antecedentes requeridos.',
+  },
+];
+
+const googleReviews = [
+  {
+    name: 'Camila R.',
+    date: 'Hace 2 semanas',
+    initials: 'CR',
+    comment:
+      'Excelente atención. Me asesoraron con mucha paciencia para elegir mis marcos y la entrega fue muy rápida.',
+  },
+  {
+    name: 'Jorge M.',
+    date: 'Hace 1 mes',
+    initials: 'JM',
+    comment:
+      'Muy buena experiencia. Tienen gran variedad de lentes y explican súper bien las opciones de cristales.',
+  },
+  {
+    name: 'Valentina P.',
+    date: 'Hace 3 semanas',
+    initials: 'VP',
+    comment:
+      'Fui con mi receta y me ayudaron de inmediato. Atención cercana, buenos modelos y excelente disposición.',
+  },
+  {
+    name: 'Rodrigo S.',
+    date: 'Hace 2 meses',
+    initials: 'RS',
+    comment:
+      'Repararon mis lentes y quedaron perfectos. Muy recomendable por rapidez, trato amable y preocupación.',
   },
 ];
 
@@ -453,29 +485,104 @@ export default function HomePage() {
                 component="a"
                 href={INSTAGRAM_URL}
                 target="_blank"
+                rel="noopener noreferrer"
                 sx={{
                   height: '100%',
                   minHeight: 360,
                   borderRadius: 4,
+                  overflow: 'hidden',
                   textDecoration: 'none',
-                  background: 'linear-gradient(135deg, #38bdf8 0%, #818cf8 100%)',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  bgcolor: 'white',
+                  color: 'text.primary',
                   textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
                   transition: 'all .25s ease',
                   '&:hover': { transform: 'translateY(-6px)', boxShadow: '0 20px 45px rgba(15,23,42,.18)' },
+                  '&:hover .catalogo-instagram-img': { transform: 'scale(1.04)', filter: 'brightness(1.06)' },
                 }}
               >
-                <CardContent>
-                  <InstagramIcon sx={{ fontSize: 56, mb: 2 }} />
-                  <Typography variant="h5" fontWeight={900}>
-                    Más módulos al Instagram
+                <CardContent sx={{ pb: 1.5 }}>
+                  <Typography variant="h5" fontWeight={900} sx={{ color: 'primary.main' }}>
+                    Catálogo
+                  </Typography>
+                  <Typography color="text.secondary" sx={{ mt: 1, fontWeight: 600 }}>
+                    Para revisar más modelos haz click aquí
                   </Typography>
                 </CardContent>
+                <Box sx={{ px: 2, pb: 2, flexGrow: 1, display: 'flex' }}>
+                  <Box
+                    className="catalogo-instagram-img"
+                    sx={{
+                      width: '100%',
+                      minHeight: 215,
+                      borderRadius: 3,
+                      backgroundImage: 'url(/assets/images/catalog/catalogo-instagram-lentes.jpeg)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      boxShadow: 'inset 0 0 0 1px rgba(255,255,255,.35)',
+                      transition: 'all .25s ease',
+                    }}
+                  />
+                </Box>
               </Card>
             </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      <Box sx={{ background: 'linear-gradient(180deg, #f8fdff 0%, #eef9ff 100%)', py: 7 }}>
+        <Container>
+          <Stack alignItems="center" textAlign="center" sx={{ mb: 4 }}>
+            <Chip label="Reseñas de Google" color="primary" variant="outlined" sx={{ mb: 1.5, fontWeight: 700 }} />
+            <Typography variant="h4" fontWeight={900}>
+              Opiniones de nuestros clientes
+            </Typography>
+            <Typography color="text.secondary" sx={{ mt: 1, maxWidth: 720 }}>
+              Clientes que valoran nuestra atención, rapidez y variedad de soluciones ópticas.
+            </Typography>
+          </Stack>
+
+          <Grid container spacing={3}>
+            {googleReviews.map((review) => (
+              <Grid item xs={12} sm={6} md={3} key={review.name}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    borderRadius: 4,
+                    bgcolor: 'rgba(255,255,255,0.96)',
+                    border: '1px solid rgba(148, 163, 184, 0.18)',
+                    boxShadow: '0 16px 42px rgba(15, 23, 42, 0.08)',
+                    transition: 'all .25s ease',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 22px 52px rgba(15, 23, 42, 0.13)',
+                    },
+                  }}
+                >
+                  <CardContent sx={{ p: 3 }}>
+                    <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1.5 }}>
+                      <Avatar sx={{ bgcolor: 'primary.main', fontWeight: 900 }}>{review.initials}</Avatar>
+                      <Box>
+                        <Typography fontWeight={900}>{review.name}</Typography>
+                        <Typography variant="body2" color="text.secondary">{review.date}</Typography>
+                      </Box>
+                    </Stack>
+                    <Stack direction="row" spacing={0.25} sx={{ color: '#fbbc04', mb: 1.5 }} aria-label="5 estrellas">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <StarRateIcon key={star} fontSize="small" />
+                      ))}
+                    </Stack>
+                    <Typography color="text.secondary" lineHeight={1.7}>
+                      “{review.comment}”
+                    </Typography>
+                    <Typography variant="body2" sx={{ mt: 2, fontWeight: 800, color: 'primary.main' }}>
+                      Reseña de Google
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </Box>
