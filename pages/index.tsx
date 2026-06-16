@@ -390,6 +390,91 @@ export default function HomePage() {
         </Container>
       </Box>
 
+
+      <Container sx={{ py: { xs: 5, md: 7 } }}>
+        <Card
+          sx={{
+            borderRadius: 5,
+            overflow: 'hidden',
+            background: 'linear-gradient(135deg, #ffffff 0%, #f0fbff 100%)',
+            border: '1px solid rgba(56, 189, 248, 0.22)',
+            boxShadow: '0 24px 70px rgba(15, 23, 42, 0.14)',
+          }}
+        >
+          <Grid container alignItems="center">
+            <Grid item xs={12} md={5}>
+              <Box
+                component="a"
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  display: 'block',
+                  position: 'relative',
+                  minHeight: { xs: 280, sm: 360, md: 430 },
+                  overflow: 'hidden',
+                  '&:hover .promo-padre-img': {
+                    transform: 'scale(1.04)',
+                    filter: 'brightness(1.05)',
+                  },
+                }}
+                aria-label="Seguir Instagram y obtener beneficio Día del Padre"
+              >
+                <Box
+                  className="promo-padre-img"
+                  sx={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: 'url(/assets/images/promocion-dia-del-padre.jpeg)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    transition: 'all .35s ease',
+                  }}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={7}>
+              <Box sx={{ p: { xs: 3, sm: 4, md: 6 } }}>
+                <Chip
+                  icon={<LocalOfferIcon />}
+                  label="Promoción Día del Padre"
+                  color="primary"
+                  sx={{ mb: 2, fontWeight: 800 }}
+                />
+                <Typography variant="h3" component="h2" fontWeight={900} lineHeight={1.08} sx={{ mb: 2 }}>
+                  Celebra a papá con un 15% de descuento en todos los lentes.
+                </Typography>
+                <Typography variant="h6" color="text.secondary" sx={{ mb: 3 }}>
+                  Únete a nuestra comunidad en Instagram, visítanos en tienda y solicita tu beneficio especial por el Día del Padre.
+                </Typography>
+                <Stack spacing={1.2} sx={{ mb: 3 }}>
+                  <Typography fontWeight={700}>✓ Sigue nuestro Instagram.</Typography>
+                  <Typography fontWeight={700}>✓ Muestra en tienda que formas parte de nuestra comunidad.</Typography>
+                  <Typography fontWeight={700}>✓ Solicita tu descuento al momento de comprar.</Typography>
+                </Stack>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ xs: 'stretch', sm: 'center' }}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    href={INSTAGRAM_URL}
+                    target="_blank"
+                    startIcon={<InstagramIcon />}
+                  >
+                    Seguir Instagram y obtener beneficio
+                  </Button>
+                  <Button variant="outlined" size="large" startIcon={<WhatsAppIcon />} onClick={sendCartToWhatsApp}>
+                    Consultar promoción
+                  </Button>
+                </Stack>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 2.5 }}>
+                  Promoción válida durante la campaña del Día del Padre. Consulta condiciones en tienda.
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Card>
+      </Container>
+
       <Container id="informacion" sx={{ py: 7 }}>
         <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2 }}>
           <LocalOfferIcon color="primary" />
